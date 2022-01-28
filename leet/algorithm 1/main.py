@@ -1,4 +1,4 @@
-from math import ceil, floor
+import math
 
 # linear search
 def linearSearch(array, target): #memory issues
@@ -88,3 +88,39 @@ def recursiveSearchInsert(array, target, left, right):
             return recursiveSearchInsert(array, target, left, center-1)
     except:
         return left
+
+
+# 977. Squares of a Sorted Array
+def sortedSquares(array):
+    return sorted(list(map(lambda x:x**2, array)))
+
+# 189. Rotate Array
+def rotate(array, steps): #time limit exceeded issue
+    for i in range(steps):
+        current = array[len(array)-1]
+        array.insert(0, current)
+        array.pop()
+    return array
+
+# using reverse function
+def rotate(array, steps):
+    # make reverse function
+    def reverse(array, start, end):
+        while start < end:
+            array[start], array[end] = array[end], array[start]
+            start+=1
+            end-=1
+        return array
+
+    #if steps exceeded array length, get a modulo of steps and array length
+    if steps > len(array):
+        steps%=len(array)
+    
+    # reverse entire array
+    array = reverse(array, 0, len(array)-1)
+    # reverse the first element until steps-1
+    array = reverse(array, 0, steps-1)
+    # reverse the rest element of the array
+    array = reverse(array, steps, len(array)-1)
+
+    return array
