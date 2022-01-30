@@ -1,3 +1,4 @@
+from audioop import reverse
 import math
 
 # linear search
@@ -124,3 +125,60 @@ def rotate(array, steps):
     array = reverse(array, steps, len(array)-1)
 
     return array
+
+# 283. Move Zeroes
+def moveZeroes(array):
+    current = 0
+    end = len(array)-1
+
+    while current < end:
+        if array[current] == 0:
+            array.pop(current)
+            array.append(0)
+            end -= 1
+        else:
+            current +=1
+    return array
+
+array = [0, 0, 0, 0, 1, 2, 3, 0, 4, 5, 0]
+
+# 167. Two Sum II - Input Array Is Sorted
+def twoSum(array, target): #time limit exceeded
+    first = 0
+
+    while first < len(array):
+        for i in range(first+1, len(array)):
+            if array[first] == array[i]:
+                pass
+            if array[first] + array[i] == target:
+                return [first+1, i+1]
+        first+=1
+    return -1
+
+def twoSum(array, target):
+    first = 0
+    end = len(array)-1
+
+    while first <= end:
+        sum = array[first] + array[end]
+        if sum == target:
+            return [first+1, end+1]
+        elif sum < target:
+            first+=1
+        else:
+            end-=1
+    return [first+1, end+1]
+
+# 344. Reverse String
+def reverseString(string):
+    return string[::-1]
+
+def reverseString(string): #two pointers
+    start = 0
+    end = len(string)-1
+
+    while start<end:
+        string[start], string[end] = string[end], string[start]
+        start+=1
+        end-=1
+    return string
