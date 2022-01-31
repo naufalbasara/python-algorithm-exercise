@@ -140,8 +140,6 @@ def moveZeroes(array):
             current +=1
     return array
 
-array = [0, 0, 0, 0, 1, 2, 3, 0, 4, 5, 0]
-
 # 167. Two Sum II - Input Array Is Sorted
 def twoSum(array, target): #time limit exceeded
     first = 0
@@ -182,3 +180,28 @@ def reverseString(string): #two pointers
         start+=1
         end-=1
     return string
+
+# 557. Reverse Words in a String III
+def reverseWords(string):
+    string = string.split(" ")
+    result = []
+    for word in string:
+        result.append(word[::-1])
+    return " ".join(result)
+
+def reverseWords(string): #two pointers approach
+    start = 0
+    end = start
+    result = ""
+
+    while end < len(string):
+        if string[end] != " ":
+            end +=1
+            if len(string) <= end+1:
+                result += string[start:end+1][::-1]
+                break
+        elif string[end] == " ":
+            result += string[start:end][::-1]
+            start = end+1
+            end +=1
+    return result
