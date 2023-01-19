@@ -1,6 +1,10 @@
 from arithmetic_arrange import arithmetic_arranger
 from time_calculator import add_time
 import shape_calculator
+# This entrypoint file to be used in development. Start by reading README.md
+import budget
+from budget import create_spend_chart
+from unittest import main
 
 if __name__ == '__main__':
     # arithmetic arranger
@@ -32,5 +36,31 @@ if __name__ == '__main__':
 
     rect1 = shape_calculator.Rectangle(10, 10)
     rect2 = shape_calculator.Rectangle(4, 8)
-    print(rect2.get_amount_inside(rect1))
+    print(rect2.get_amount_inside(rect1))    
+
+
+    #Budget App
+    food = budget.Category("Food")
+    food.deposit(1000, "initial deposit")
+    food.withdraw(10.15, "groceries")
+    food.withdraw(15.89, "restaurant and more food for dessert")
+    print(food.get_balance())
+    clothing = budget.Category("Clothing")
+    food.transfer(50, clothing)
+    clothing.withdraw(25.55)
+    clothing.withdraw(100)
+    auto = budget.Category("Auto")
+    auto.deposit(1000, "initial deposit")
+    auto.withdraw(15)
+
+    print(food)
+    print(clothing)
+    print(auto)
+
+    total_expenses = 76.04+25.55+15
+    print((total_expenses))
+    print(create_spend_chart([food, clothing, auto]))
+
+    # Run unit tests automatically
+    main(module='test_module', exit=False)
     
