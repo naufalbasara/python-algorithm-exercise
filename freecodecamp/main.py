@@ -14,10 +14,21 @@ if __name__ == '__main__':
         problems.append(problem_input)
         problem_input = input("Formatting will be number1 + number2, example: 1 + 2\nInput problems to solve:")
 
+    print(arithmetic_arranger(problems,True))
+
+
     # time calculator
-    print(add_time("6:30 PM", "205:12"))
-    print()
-    print(round(212/60))
+    import prob_calculator
+
+    prob_calculator.random.seed(95)
+    hat = prob_calculator.Hat(blue=4, red=2, green=6)
+    probability = prob_calculator.experiment(
+        hat=hat,
+        expected_balls={"blue": 2,
+                        "red": 1},
+        num_balls_drawn=4,
+        num_experiments=3000)
+    print("Probability:", probability)
 
     # Polygon Area Calculator
     rect = shape_calculator.Rectangle(10, 5)
@@ -56,11 +67,23 @@ if __name__ == '__main__':
     print(food)
     print(clothing)
     print(auto)
-
-    total_expenses = 76.04+25.55+15
-    print((total_expenses))
     print(create_spend_chart([food, clothing, auto]))
 
+    food = budget.Category("Food")
+    entertainment = budget.Category("Entertainment")
+    business = budget.Category("Business")
+
+    food.deposit(900, "deposit")
+    entertainment.deposit(900, "deposit")
+    business.deposit(900, "deposit")
+    food.withdraw(105.55)
+    entertainment.withdraw(33.40)
+    business.withdraw(10.99)
+
+    print(food)
+    print(entertainment)
+    print(business)
+    print(create_spend_chart([business, food, entertainment]))
     # Run unit tests automatically
     main(module='test_module', exit=False)
     

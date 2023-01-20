@@ -74,7 +74,9 @@ class Category:
 def create_spend_chart(categories):
     output = 'Percentage spent by category\n'
     total_expenses = 0
+    count_category = 0
     category_expenses = {}
+    max_len_category = 0
 
     for category in categories:
         expense = 0
@@ -82,9 +84,30 @@ def create_spend_chart(categories):
             total_expenses += float(transaction['amount']) if transaction['amount'] < 0 else 0
             expense += float(transaction['amount']) if transaction['amount'] < 0 else 0
         category_expenses[f'{category.category}'] = expense
+        if max_len_category < len(category.category):
+            max_len_category = len(category.category)
         expense = 0
+        count_category +=1
 
     for i in range(100, -1, -10):
-        output += f'{i}|\n'.rjust(5)
+        output += '{}|'.format(i).rjust(5)
+        count = 0
+        for key in category_expenses:
+            count += 1
+            if i < abs(category_expenses[key]/total_expenses)*100:
+                output += ' o '
+            if count == count_category:
+                output += '\n'
+
+    output += '     ' + f"{'-' * count_category*3}" + '\n'
+
+    for index in range(max_len_category):
+        output += '     '
+        for key in category_expenses:
+            if index < len(key):
+                output += f' {key[index]} '
+            else:
+                output += '   '
+        output += '\n'
 
     return output
