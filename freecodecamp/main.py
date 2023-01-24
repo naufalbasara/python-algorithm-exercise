@@ -1,5 +1,5 @@
 from arithmetic_arrange import arithmetic_arranger
-from time_calculator import add_time
+from .time-calculator.time_calculator import add_time
 import shape_calculator
 # This entrypoint file to be used in development. Start by reading README.md
 import budget
@@ -17,9 +17,10 @@ if __name__ == '__main__':
     print(arithmetic_arranger(problems,True))
 
 
-    # time calculator
+    # Time Calculator
     import prob_calculator
 
+    # Probability Calculator
     prob_calculator.random.seed(95)
     hat = prob_calculator.Hat(blue=4, red=2, green=6)
     probability = prob_calculator.experiment(
